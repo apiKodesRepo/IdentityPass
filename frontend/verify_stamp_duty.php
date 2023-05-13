@@ -14,8 +14,8 @@ if (isset($_POST['verify_stamp_duty_btn'])) {
             "customer_name" => $customer_name
         ];
 
-
         $verify_stamp_duty_fn = verify_stamp_duty($data);
+    
 
         // {
         //     "status": true,
@@ -201,9 +201,8 @@ if (isset($_POST['verify_stamp_duty_btn'])) {
                         <?php
                         if (isset($verify_stamp_duty_error_message)) {
                         ?>
-                            <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                <? //$verify_stamp_duty_error_message 
-                                ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= $verify_stamp_duty_error_message ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                     <?php

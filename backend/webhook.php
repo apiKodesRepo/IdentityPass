@@ -3,7 +3,7 @@ require_once('./vendor/autoload.php');
 require('./config.php');
 
 // If you specified a secret hash, check for the signature
-$secretHash = FLUTTERWAVE_SECRET_HASH;
+$secretHash = "";
 $signature = $request->header('verif-hash');
 
 if (!$signature || ($signature !== $secretHash)) {

@@ -4,7 +4,7 @@ require('./config.php');
 
 // If you specified a secret hash, check for the signature
 $secretHash = "";
-$signature = $request->header('verif-hash');
+$signature = $request->header('x-identitypass-signature');
 
 if (!$signature || ($signature !== $secretHash)) {
     // This request isn't from Flutterwave; discard

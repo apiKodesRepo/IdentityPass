@@ -23,13 +23,13 @@ if (isset($_POST['tin_verification_btn'])) {
         // print_r(($decode_tin_verification_fn));
 
         if ($decode_tin_verification_fn->status === TRUE) {
-            $tin_verification_success_message = $decode_tin_verification_fn->detail . ' - ' . $decode_tin_verification_fn->message;
+            $tin_verification_success_message = $decode_tin_verification_fn->detail;
 
             $tin_verification_success_data = $decode_tin_verification_fn;
         }
 
         if ($decode_tin_verification_fn->status === FALSE) {
-            $tin_verification_error_message = $decode_tin_verification_fn->detail . ' - ' . $decode_tin_verification_fn->message;
+            $tin_verification_error_message = $decode_tin_verification_fn->detail;
         }
     }
 }
@@ -44,7 +44,7 @@ if (isset($_POST['tin_verification_btn'])) {
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="styles.css" type="text/css" rel="stylesheet" />
+    
     <title>IdentityPass Tax Identification Number Verification CakePHP Implementation</title>
 </head>
 

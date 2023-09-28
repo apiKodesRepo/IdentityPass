@@ -41,7 +41,7 @@ if (isset($_POST['nin_virtual_verification_btn'])) {
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="styles.css" type="text/css" rel="stylesheet" />
+    
     <title>IdentityPass NIN virtual Verification CakePHP Implementation</title>
 </head>
 

@@ -66,7 +66,7 @@ if (isset($_POST['verify_stamp_duty_btn'])) {
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="styles.css" type="text/css" rel="stylesheet" />
+    
     <title>IdentityPass Stamp Duty Verification CakePHP Implementation</title>
 </head>
 

@@ -1,32 +1,30 @@
 <?php
 require('../backend/index.php');
 
-if (isset($_POST['bvn_igree_verification_btn'])) {
+if (isset($_POST['phone_verification_btn'])) {
     if (
-        isset($_POST['bvn_number'])
+        isset($_POST['phone_number'])
     ) {
-        $bvn_number = $_POST['bvn_number'];
-        $channel = $_POST['channel'];
-        $otp  = $_POST['otp'];
+        $phone_number = $_POST['phone_number'];
 
         $data =  [
-            "number" => $bvn_number,
-            "channel" => $channel,
-            "otp" => $otp // default test otp
+            "number" => $phone_number
         ];
 
-        $bvn_igree_verification_fn = bvn_igree_verification($data);
+        $phone_verification_fn = phone_verification($data);
 
-        $decode_bvn_igree_verification_fn = json_decode($bvn_igree_verification_fn);
+        $decode_phone_verification_fn = json_decode($phone_verification_fn);
 
-        if ($decode_bvn_igree_verification_fn->status === TRUE) {
-            $bvn_igree_verification_success_message = $decode_bvn_igree_verification_fn->detail . ' - ' . $decode_bvn_igree_verification_fn->message ;
+        print_r(($decode_phone_verification_fn));
 
-            $bvn_igree_verification_success_data = $decode_bvn_igree_verification_fn;
+        if ($decode_phone_verification_fn->status === TRUE) {
+            $phone_verification_success_message = $decode_phone_verification_fn->detail;
+
+            $phone_verification_success_data = $decode_phone_verification_fn;
         }
 
-        if ($decode_bvn_igree_verification_fn->status === FALSE) {
-            $bvn_igree_verification_error_message = $decode_bvn_igree_verification_fn->detail . ' - ' . $decode_bvn_igree_verification_fn->message;
+        if ($decode_phone_verification_fn->status === FALSE) {
+            $phone_verification_error_message = $decode_phone_verification_fn->detail;
         }
     }
 }
@@ -41,60 +39,47 @@ if (isset($_POST['bvn_igree_verification_btn'])) {
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
-    <title>IdentityPass IGree BVN Verification CakePHP Implementation</title>
+
+    <title>IdentityPass Tax Identification Number Verification CakePHP Implementation</title>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row ">
             <div class="col-sm-12 col-md-12 col-lg-12 my-3">
-                <h2 class="my-3 text-center">ApiKodes IdentityPass API implementations (Verify iGree BVN)</h2>
+                <h2 class="my-3 text-center">ApiKodes IdentityPass API implementations (Verify Phone Number)</h2>
 
                 <div class="">
                     <?php
-                    if (isset($bvn_igree_verification_success_message)) {
-
+                    if (isset($phone_verification_success_message)) {
                     ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <?= $bvn_igree_verification_success_message ?>
+                            <?= $phone_verification_success_message ?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-
 
                         <div class="container-fluid">
                             <table class="table table-responsive table-fluid">
                                 <thead>
-                                    <th colspan="2"> Vehicle Plate Number Verification Result </th>
+                                    <th colspan="2"> Phone Verification Result </th>
                                 </thead>
+
                                 <tr>
-                                    <th>Vehicle Number: </th>
+                                    <th>First Name: </th>
                                     <td>
-                                        <?= ucwords($bvn_igree_verification_success_data->data->bvn_number); ?>
+                                        <?= ucwords($phone_verification_success_data->data->firstName); ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Vehicle Name: </th>
+                                    <th>Middle Name: </th>
                                     <td>
-                                        <?= ucfirst($bvn_igree_verification_success_data->data->vehicle_name); ?>
+                                        <?= ucfirst($phone_verification_success_data->data->middlename); ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Vehicle Color: </th>
+                                    <th>Phone Number: </th>
                                     <td>
-                                        <?= ucfirst($bvn_igree_verification_success_data->data->vehicle_color); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Verification Status: </th>
-                                    <td>
-                                        <?= strtolower($bvn_igree_verification_success_data->verification->status); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Verification Reference : </th>
-                                    <td>
-                                        <?= strtolower($bvn_igree_verification_success_data->verification->reference); ?>
+                                        <?= ucfirst($phone_verification_success_data->data->phoneNumber); ?>
                                     </td>
                                 </tr>
                             </table>
@@ -105,16 +90,18 @@ if (isset($_POST['bvn_igree_verification_btn'])) {
                     ?>
 
                         <?php
-                        if (isset($bvn_igree_verification_error_message)) {
+                        if (isset($phone_verification_error_message)) {
                         ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <?= $bvn_igree_verification_error_message ?>
+                                <?= $phone_verification_error_message ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                     <?php
                         }
                     }
                     ?>
+
+                    <!-- test credential provided  -->
 
                     <div class="alert alert-info py-auto">
                         <div class="row">
@@ -128,37 +115,22 @@ if (isset($_POST['bvn_igree_verification_btn'])) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <p> BVN : <b>54651333604</b> </p>
-                            </div>
-                            <div class="col-md-3">
-                                <p> Channel : <b>0701***2345</b> </p>
-                            </div>
-                            <div class="col-md-3">
-                                <p> Otp : <b>123456</b> </p>
+                            <div class="col-md-9">
+                                <p> Number: 08082838283 </p>
                             </div>
                         </div>
                     </div>
 
-
                 </div>
                 <form method="POST" action="" class="px-3">
                     <div class="form-group my-2">
-                        <label for="bvn_number">BVN </label>
-                        <input name="bvn_number" class="form-control form-input" placeholder="Enter BVN Number" type="text" required />
-                    </div>
-                    <div class="form-group my-2">
-                        <label for="channel">Channel </label>
-                        <input name="channel" class="form-control form-input" placeholder="Enter Channel" type="text" required />
+                        <label for="phone_number">Phone Number: </label>
+                        <input name="phone_number" class="form-control form-input" placeholder="Enter phone" type="text" required />
                     </div>
 
-                    <div class="form-group my-2">
-                        <label for="otp">OTP </label>
-                        <input name="otp" class="form-control form-input" placeholder="Enter OTP" type="text" required />
-                    </div>
 
                     <div class="form-submit">
-                        <button class="btn btn-primary" name="bvn_igree_verification_btn" type="submit"> Submit </button>
+                        <button class="btn btn-primary" name="phone_verification_btn" type="submit"> Submit </button>
                     </div>
                 </form>
             </div>
